@@ -1087,7 +1087,7 @@ class Model(Network):
 
         return results
 
-    def evaluate_object_detection_2(self, ground_truth, coord_type, detection_data=None, classes=None,
+    def calculate_object_detection_scores(self, ground_truth, coord_type, detection_data=None, classes=None,
                                   iou_thresholds=np.linspace(0.5, 0.95, 10, endpoint=True),
                                   return_boxes=False, confidence_threshold=None, k=None):
         """
@@ -1288,11 +1288,6 @@ class Model(Network):
                 ap_cls = np.sum(interpolated_ap) / 11
                 results_class = {
                     'class': cls,
-                    'precision': precision,
-                    'recall': recall,
-                    'AP': ap_cls,
-                    'interpolated precision': interpolated_ap,
-                    'interpolated recall': recall_level,
                     'total positives': len(gt_bb_cls_list),
                     'total TP': np.sum(tp),
                     'total FP': np.sum(fp)
